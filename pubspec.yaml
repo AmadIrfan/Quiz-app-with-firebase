@@ -1,0 +1,103 @@
+name: flutter_logical_quiz
+
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+5
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  auth_handler: any
+  chewie: ^1.7.4
+  cloud_firestore: any
+  country_code_picker: any
+  cupertino_icons: ^1.0.2
+  delayed_display: any
+  dots_indicator: any
+  figma_squircle: any
+  firebase_auth: any
+  firebase_core: any
+  firebase_messaging: any
+  firebase_storage: any
+  fl_chart: any
+  flutter:
+    sdk: flutter
+  flutter_email_sender: any
+  flutter_firebase_recaptcha: null
+  flutter_rating_bar: any
+  flutter_share: any
+  flutter_staggered_animations: any
+  flutter_svg: any
+  fluttertoast: any
+  get: any
+  google_mobile_ads: any
+  image_picker: any
+  in_app_purchase: ^3.1.13
+  intl: any
+  launch_review: any
+  mailto: any
+  pin_input_text_field: any
+  progress_state_button: any
+  purchases_flutter: ^6.20.0
+  rxdart: any
+  shared_preferences: any
+  step_progress_indicator: any
+  url_launcher: any
+  uuid: ^4.4.0
+  youtube_player_flutter: ^8.1.2
+
+dev_dependencies:
+  flutter_launcher_icons: "^0.13.1"
+  flutter_test:
+    sdk: flutter
+
+flutter_launcher_icons:
+  android: "app_icon"
+  ios: true
+  image_path: "assets/images/app_logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/app_logo.png"
+    background_color: "#FFFFFF"
+    # theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/images/app_logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/images/app_logo.png"
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+    - assets/tabIcons/
+    - assets/Thumbnails/
+    - assets/quizImages/
+    - assets/splashIcons/
+    - assets/settingIcons/
+
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: fonts/OpenSans-Bold.ttf
+        - asset: fonts/OpenSans-BoldItalic.ttf
+        - asset: fonts/OpenSans-ExtraBold.ttf
+        - asset: fonts/OpenSans-ExtraBoldItalic.ttf
+        - asset: fonts/OpenSans-Italic.ttf
+        - asset: fonts/OpenSans-Light.ttf
+        - asset: fonts/OpenSans-LightItalic.ttf
+        - asset: fonts/OpenSans-Medium.ttf
+        - asset: fonts/OpenSans-MediumItalic.ttf
+        - asset: fonts/OpenSans-Regular.ttf
+        - asset: fonts/OpenSans-SemiBold.ttf
+        - asset: fonts/OpenSans-SemiBoldItalic.ttf
