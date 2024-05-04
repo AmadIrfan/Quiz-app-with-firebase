@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-import '../../ads/AdsFile.dart';
 import '../../app_purchase/dash_purchases.dart';
 import '../../app_purchase/in_app_purchase_page.dart';
 import '../../ui/quiz_page.dart';
@@ -19,12 +18,12 @@ import '../../provider/topic_controller.dart';
 import '../../provider/check_data_controller.dart';
 
 class TopicPage extends StatelessWidget {
-//   final AdsFile adsFile;
+  // final AdsFile adsFile;
   final LoginController loginController;
 
   TopicPage({
     super.key,
-//     required this.adsFile,
+    // required this.adsFile,
     required this.loginController,
   });
 
@@ -36,33 +35,31 @@ class TopicPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        getCommonHeader(
-          context,
-          widget: Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    getHeaderTitle("Quiz Topics", context),
-                    getVerticalSpace(10),
-                    getCustomFont(
-                      'Select a topic to practice',
-                      FetchPixels.getPixelHeight(80),
-                      Colors.white,
-                      1,
-                      fontWeight: FontWeight.w400,
-                    )
-                  ],
+        getCommonHeader(context,
+            widget: Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      getHeaderTitle("Quiz Topics", context),
+                      getVerticalSpace(10),
+                      getCustomFont(
+                        'Select a topic to practice',
+                        FetchPixels.getPixelHeight(80),
+                        Colors.white,
+                        1,
+                        fontWeight: FontWeight.w400,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
+              ],
+            )),
         Container(
           margin: EdgeInsets.only(top: getHeaderTopMargin()),
           child: Obx(() {
@@ -75,9 +72,8 @@ class TopicPage extends StatelessWidget {
                       horizontal: FetchPixels.getDefaultHorSpace(context)),
                   itemCount: topicController.list.length,
                   itemBuilder: (context, index) {
-                    TopicModel model = TopicModel.fromFirestore(
-                      topicController.list[index],
-                    );
+                    TopicModel model =
+                        TopicModel.fromFirestore(topicController.list[index]);
                     return AnimationConfiguration.staggeredList(
                         position: index,
                         duration: const Duration(milliseconds: 375),
@@ -86,50 +82,54 @@ class TopicPage extends StatelessWidget {
                           child: FadeInAnimation(
                             child: InkWell(
                               onTap: () {
-                                // loginController.getUser().then((value) {
-                                //   if (value.isNotEmpty &&
-                                //       loginController.isLogin.value) {
-                                checkDataController.fetchData(model.refId!,
-                                    (value) async {
-                                  if (value) {
-                                    // showInterstitialAd(adsFile, () {
-                                    // ProfileModel? pm =
-                                    //     await LoginData.getProfileData();
-                                    // print(pm?.purchase_status);
-                                    // if (pm?.purchase_status !=
-                                    //     status_purchased) {
-                                    //     Navigator.push(
-                                    //       context,
-                                    //       MaterialPageRoute(
-                                    //         builder: (context) => PurchasePage(
-                                    //           topicModel: model,
-                                    //           // loginController:
-                                    //           //     loginController,
-                                    //         ),
-                                    //       ),
-                                    //     );
-                                    // } else {
-                                    pushPage(
-                                      QuizPage(
-                                        topicModel: model,
-                                        isFirstPurchased: false,
-                                      ),
-                                    );
-                                    //       function: (value) {
-                                    //         if (value != null && value) {}
-                                    //       },
-                                    //     );
-                                    // }
-                                    // });
-                                    //       } else {
-                                    //         showCustomToast(
-                                    //             context: context,
-                                    //             message: 'data not available');
-                                    //       }
-                                    //     });
+                                loginController.getUser().then((value) {
+                                  if (value.isNotEmpty &&
+                                      loginController.isLogin.value) {
+                                    checkDataController.fetchData(model.refId!,
+                                        (value) async {
+                                      if (value) {
+                                        // print(value);
+                                        // showInterstitialAd(adsFile, () {
+                                        // ===========================================================>>
+                                        // ProfileModel? pm =
+                                        //     await LoginData.getProfileData();
+                                        // print(pm?.purchase_status);
+                                        ProfileModel? pm =
+                                            await LoginData.getProfileData();
+                                        if (pm?.purchase_status !=
+                                            status_purchased) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PurchasePage(
+                                                topicModel: model,
+                                                loginController:
+                                                    loginController,
+                                              ),
+                                            ),
+                                          );
+                                        } else {
+                                          pushPage(
+                                            QuizPage(
+                                              topicModel: model,
+                                              isFirstPurchased: false,
+                                            ),
+                                            function: (value) {
+                                              if (value != null && value) {}
+                                            },
+                                          );
+                                        }
+                                        // });
+                                      } else {
+                                        showCustomToast(
+                                            context: context,
+                                            message: 'data not available');
+                                      }
+                                    });
                                   } else {
-                                    //     sendLoginPage(
-                                    //         context: context, function: () {});
+                                    sendLoginPage(
+                                        context: context, function: () {});
                                   }
                                 });
                               },

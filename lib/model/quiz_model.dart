@@ -26,8 +26,11 @@ class QuizModel {
 
   factory QuizModel.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data() as Map;
+
     int quizType = data['type'];
+
     String list = '""';
+
     List<String> result = [];
     if (quizType == 0) {
       list = '${data['option_list']}';

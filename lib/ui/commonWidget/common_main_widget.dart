@@ -25,6 +25,7 @@ class CommonMainWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('============= $isFirstPurchased  ]]]]');
     double marginTop = FetchPixels.getPixelHeight(230);
     double appBarHeight = FetchPixels.getPixelHeight(270);
     var circle = FetchPixels.getPixelHeight(200);
@@ -90,53 +91,53 @@ class CommonMainWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      //       question model
-
                       Container(
                         margin: EdgeInsets.symmetric(
                             horizontal:
                                 FetchPixels.getDefaultHorSpace(context)),
                         child: Column(
-                          children: quizModel.type == 1
-                              ? List.generate(
-                                  2,
-                                  (index) {
-                                    String answer = 'False';
-                                    if (index == 0) {
-                                      answer = 'True';
-                                    }
-                                    bool isSelected =
-                                        quizModel.answerPosition == index;
-                                    return CommonQuizButtonWidget(
-                                      optionType: '',
-                                      option: answer,
-                                      isTrue: true,
-                                      isSelected: isSelected,
-                                      function: () {
-                                        controller.setAnswer(index);
-                                      },
-                                    );
-                                  },
-                                )
-                              : List.generate(
-                                  quizModel.optionList!.length,
-                                  (index) {
-                                    String answer =
-                                        quizModel.optionList![index];
-                                    bool isSelected =
-                                        quizModel.answerPosition == index;
-                                    return CommonQuizButtonWidget(
-                                      optionType: getOptionType(index),
-                                      option: answer,
-                                      isSelected: isSelected,
-                                      isTrue: false,
-                                      function: () {
-                                        controller.setAnswer(index);
-                                      },
-                                    );
-                                  },
-                                ),
-                        ),
+                            children: quizModel.type == 1
+                                ? List.generate(
+                                    2,
+                                    (index) {
+                                      String answer = 'False';
+                                      if (index == 0) {
+                                        answer = 'True';
+                                      }
+
+                                      bool isSelected =
+                                          quizModel.answerPosition == index;
+
+                                      return CommonQuizButtonWidget(
+                                        optionType: '',
+                                        option: answer,
+                                        isTrue: true,
+                                        isSelected: isSelected,
+                                        function: () {
+                                          controller.setAnswer(index);
+                                        },
+                                      );
+                                    },
+                                  )
+                                : List.generate(
+                                    quizModel.optionList!.length,
+                                    (index) {
+                                      String answer =
+                                          quizModel.optionList![index];
+                                      bool isSelected =
+                                          quizModel.answerPosition == index;
+
+                                      return CommonQuizButtonWidget(
+                                        optionType: getOptionType(index),
+                                        option: answer,
+                                        isSelected: isSelected,
+                                        isTrue: false,
+                                        function: () {
+                                          controller.setAnswer(index);
+                                        },
+                                      );
+                                    },
+                                  )),
                       )
                     ],
                   ),
@@ -160,6 +161,7 @@ class CommonMainWidget extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: getButtonWidget(context, 'Next', () {
+                        print('2===============> $isFirstPurchased');
                         controller.nextQuiz(isFirstPurchased);
                       }, horizontalSpace: 0),
                     )

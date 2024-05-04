@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
 
 import 'data/FirebaseData.dart';
 import '../provider/pref_data.dart';
@@ -70,22 +69,5 @@ class LoginController extends GetxController {
       }
       return '';
     }
-  }
-
-  Future<void> setLocalId() async {
-    final Uuid _uid = Uuid();
-    String uid = _uid.v1();
-    SharedPreferences sf = await SharedPreferences.getInstance();
-    sf.setString('userUId', uid.toString());
-    print(uid.toString());
-    PrefData.setLogin(true);
-  }
-
-  Future<String?> getLocalId() async {
-    SharedPreferences sf = await SharedPreferences.getInstance();
-    String? d = sf.getString(
-      'userUId',
-    );
-    return d;
   }
 }

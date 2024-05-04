@@ -15,12 +15,12 @@ import '../../provider/login_controller.dart';
 
 class ReportPage extends StatelessWidget {
   final AppController appController;
-//   final LoginController loginController;
+  final LoginController loginController;
 
   ReportPage({
     super.key,
     required this.appController,
-//     required this.loginController,
+    required this.loginController,
   });
   final String title = 'TFL SERU - Section';
   final List<Map<String, String>> videoList = [

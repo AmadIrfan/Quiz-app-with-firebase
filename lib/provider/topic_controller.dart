@@ -9,6 +9,7 @@ class TopicController extends GetxController {
 
   @override
   void onInit() {
+    // print('called');
     fetchData();
     super.onInit();
   }

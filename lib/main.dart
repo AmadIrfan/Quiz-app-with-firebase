@@ -12,7 +12,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  // MobileAds.instance.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -24,6 +24,7 @@ void main() async {
     badge: true,
     sound: true,
   );
+
   runApp(
     const MyApp(),
   );

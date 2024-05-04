@@ -33,16 +33,13 @@ class DashPurchases extends GetxController {
     super.dispose();
   }
 
-  Future<bool> buy(ProductDetails product) async {
+  Future<void> buy(ProductDetails product) async {
     PurchaseParam param = GooglePlayPurchaseParam(
       productDetails: product,
     );
 
-    bool response = await iapConnection.buyConsumable(
-      purchaseParam: param,
-    );
-
-    return response;
+    final response = await iapConnection.buyNonConsumable(purchaseParam: param);
+    Future.value(response);
   }
 
   void _onPurchaseUpdate(List<PurchaseDetails> purchaseDetailsList) async {
@@ -51,10 +48,9 @@ class DashPurchases extends GetxController {
       (purchaseDetails) async {
         if (purchaseDetails.status == PurchaseStatus.pending) {
         } else if (purchaseDetails.status == PurchaseStatus.error) {
-          showSnackBar(purchaseDetails.status.name);
+          print(purchaseDetails.status);
         } else if (purchaseDetails.status == PurchaseStatus.purchased) {
           showSnackBar(purchaseDetails.status.name);
-          await iapConnection.completePurchase(purchaseDetails);
           pushPage(
             QuizPage(
               isFirstPurchased: true,
@@ -65,14 +61,15 @@ class DashPurchases extends GetxController {
             },
           );
           await FirebaseMethod().updateStatus();
+          print(purchaseDetails.status);
         } else if (purchaseDetails.status == PurchaseStatus.canceled) {
           showSnackBar(purchaseDetails.status.name);
         }
+        print(purchaseDetails.status);
       },
     );
   }
-        
-    
+
   Future<void> loadPurchases() async {
     final available = await iapConnection.isAvailable();
 
@@ -95,11 +92,5 @@ class DashPurchases extends GetxController {
   void _updateStreamOnError(dynamic error) {
     _subscription.cancel();
     showSnackBar(error);
-  }
-
-  Future<ProductDetails> getProductData(Set<String> id) async {
-    ProductDetailsResponse data = await iapConnection.queryProductDetails(id);
-    if (data.productDetails.isNotEmpty) {}
-    return data.productDetails.first;
   }
 }

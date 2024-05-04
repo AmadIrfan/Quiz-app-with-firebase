@@ -4,6 +4,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../resizer/widget_utils.dart';
 
+
 class VideoPage extends StatefulWidget {
   const VideoPage({super.key, required this.url, required this.name});
   final String url;

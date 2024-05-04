@@ -24,12 +24,9 @@ import '../commonWidget/common_profile_widget.dart';
 class SettingPage extends StatelessWidget {
   final AppController appController;
   final Duration initialDelay = const Duration(milliseconds: 200);
-//   final LoginController loginController;
-  const SettingPage({
-    super.key,
-    required this.appController,
-//     required this.loginController,
-  });
+  final LoginController loginController;
+  const SettingPage(
+      {super.key, required this.appController, required this.loginController});
 
   @override
   Widget build(BuildContext context) {
@@ -49,42 +46,40 @@ class SettingPage extends StatelessWidget {
                 delay: Duration(seconds: initialDelay.inSeconds),
                 child: ListView(
                   children: [
-                    //     Obx(() {
-                    //       return
-                    //       return loginController.isLogin.value
-                    //           ? Visibility(
-                    //               visible: loginController.isLogin.value,
-                    //               child: Column(
-                    //                 crossAxisAlignment: CrossAxisAlignment.start,
-                    //                 children: [
-                    //                   CommonProfileWidget(
-                    //                       isEdit: true,
-                    //                       function: () {
-                    //                         pushPage(const ProfilePage());
-                    //                       }),
-                    //                   geTitle(context, 'Account'),
-                    //                   getItem(
-                    //                       context: context,
-                    //                       title: 'Profile',
-                    //                       icon: 'profile.svg',
-                    //                       controller: value,
-                    //                       function: () {
-                    //                         pushPage(const ProfilePage());
-                    //                       }),
-                    //                   getItem(
-                    //                       context: context,
-                    //                       title: 'Password',
-                    //                       icon: 'password.svg',
-                    //                       controller: value,
-                    //                       function: () {
-                    //                         pushPage(const ChangePasswordPage());
-                    //                       })
-                    //                 ],
-                    //               ),
-                    //             )
-                    //           :
-                    getVerticalSpace(130),
-                    //     }),
+                    Obx(() {
+                      return loginController.isLogin.value
+                          ? Visibility(
+                              visible: loginController.isLogin.value,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CommonProfileWidget(
+                                      isEdit: true,
+                                      function: () {
+                                        pushPage(const ProfilePage());
+                                      }),
+                                  geTitle(context, 'Account'),
+                                  getItem(
+                                      context: context,
+                                      title: 'Profile',
+                                      icon: 'profile.svg',
+                                      controller: value,
+                                      function: () {
+                                        pushPage(const ProfilePage());
+                                      }),
+                                  getItem(
+                                      context: context,
+                                      title: 'Password',
+                                      icon: 'password.svg',
+                                      controller: value,
+                                      function: () {
+                                        pushPage(const ChangePasswordPage());
+                                      })
+                                ],
+                              ),
+                            )
+                          : getVerticalSpace(130);
+                    }),
                     geTitle(context, 'General'),
                     GetBuilder<ThemeController>(
                       builder: (controller) {
@@ -135,27 +130,26 @@ class SettingPage extends StatelessWidget {
                           // launchURL("https://www.officialreviewers-ph.com");
                           // pushPage(AboutPage());
                         }),
-                    //     Obx(() {
-                    //       return
-                    //       Visibility(
-                    //         visible: loginController.isLogin.value,
-                    //         child: getButtonWidget(context, 'Logout', () {
-                    //           showCommonDialog(
-                    //               widget: LogoutDialog(
-                    //                 function: () {
-                    //                   LoginController().logout();
-                    //                   loginController.changeData(false);
-                    //                   appController.setReportData();
-                    //                   showCustomToast(
-                    //                       context: context, message: 'Logout');
-                    //                   // sendLoginPage(
-                    //                   //     context: context, function: () {});
-                    //                 },
-                    //               ),
-                    //               context: context);
-                    //         }, verticalSpace: 10),
-                    //       );
-                    //     })
+                    Obx(() {
+                      return Visibility(
+                        visible: loginController.isLogin.value,
+                        child: getButtonWidget(context, 'Logout', () {
+                          showCommonDialog(
+                              widget: LogoutDialog(
+                                function: () {
+                                  LoginController().logout();
+                                  loginController.changeData(false);
+                                  appController.setReportData();
+                                  showCustomToast(
+                                      context: context, message: 'Logout');
+                                  // sendLoginPage(
+                                  //     context: context, function: () {});
+                                },
+                              ),
+                              context: context);
+                        }, verticalSpace: 10),
+                      );
+                    })
                   ],
                 ),
               ),

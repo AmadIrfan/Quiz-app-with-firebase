@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_logical_quiz/app_purchase/IAP.dart';
 import 'package:get/get.dart';
-
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../model/topic_model.dart';
+import '../provider/login_controller.dart';
 import '../app_purchase/dash_purchases.dart';
-import '../utility/constants.dart';
 
 class PurchasePage extends StatefulWidget {
   PurchasePage({
     super.key,
-//     required this.loginController,
+    required this.loginController,
     required this.topicModel,
   });
   final TopicModel topicModel;
-//   final LoginController loginController;
+  final LoginController loginController;
 
   @override
   State<PurchasePage> createState() => _PurchasePageState();
@@ -68,6 +69,7 @@ class _PurchasePageState extends State<PurchasePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
+                          // Added Expanded widget to allow the text to expand
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -88,7 +90,7 @@ class _PurchasePageState extends State<PurchasePage> {
                             final data = await inAPpController.buy(
                               inAPpController.products[index],
                             );
-                            showSnackBar(data);
+                            // print(data);
                           },
                           child: Text('Buy'),
                         ),

@@ -43,6 +43,7 @@ class _QuizPage extends State<QuizPage> {
   @override
   void initState() {
     super.initState();
+
     dataController = Get.put(DataController(widget.topicModel.refId!));
     setState(() {});
   }
@@ -79,7 +80,6 @@ class _QuizPage extends State<QuizPage> {
       appBar: getNoneAppBar(context, color: getBackgroundColor(context)),
       body: SafeArea(
         child: Obx(() {
-          print(dataController!.isLoading.value);
           if (dataController!.isLoading.value) {
             return getProgressDialog(context);
           } else {
@@ -108,7 +108,9 @@ class _QuizPage extends State<QuizPage> {
                                 isFirstPurchased: widget.isFirstPurchased,
                                 onQuit: () {
                                   onBackClick(model);
+                                  print('====not called');
                                   if (widget.isFirstPurchased) {
+                                    print('====called');
                                     Get.back();
                                   }
                                 },
@@ -117,6 +119,7 @@ class _QuizPage extends State<QuizPage> {
                           ],
                         ),
                         onWillPop: () async {
+                          print('<+++++++++++++++++++++>');
                           onBackClick(model);
                           return false;
                         });

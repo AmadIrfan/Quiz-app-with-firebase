@@ -64,6 +64,11 @@ class LoginData {
           .then((value) {
         auth.currentUser != null;
       });
+      // user = userCredential.user;
+      //
+      //
+      // user = auth.currentUser;
+
       return auth.currentUser != null;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

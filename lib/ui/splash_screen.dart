@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-import '../provider/login_controller.dart';
-import '../provider/pref_data.dart';
 import 'home_page.dart';
 import '../utility/constants.dart';
 import '../resizer/fetch_pixels.dart';
@@ -22,7 +20,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
   bool isFirst = true;
-  final LoginController loginController = Get.put(LoginController());
+
   @override
   void initState() {
     super.initState();
@@ -71,19 +69,18 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
   }
 
   _getIsFirst() async {
+    // bool i = await PrefData.getIsLogin();
+
     Future.delayed(Duration.zero, () async {
-//       bool i = await PrefData.getIsLogin();
-      String? a = await loginController.getLocalId();
-      if (a == null) {
-        await loginController.setLocalId();
-        showSnackBar('Your Unique Id is created');
-      }
+      // bool isIntro = await PrefData.getIsIntro();
+      // print(isIntro);
       // if (isIntro) {
       // print('INTRO');
       // Get.to(const IntroPage());
       // } else {
       Timer(const Duration(seconds: 3), () async {
         // if (i) {
+        print('HOME PAGE');
         Get.to(const HomePage());
         // } else {
         //   sendLoginPage(context: context, fromIntro: false, function: () {});

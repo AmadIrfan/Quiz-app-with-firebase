@@ -68,7 +68,7 @@ class _HomePage extends State<HomePage> {
       list.add(
         ReportPage(
           appController: appController,
-          //   loginController: loginController,
+          loginController: loginController,
         ),
       );
       list.add(
@@ -87,13 +87,11 @@ class _HomePage extends State<HomePage> {
       list.add(
         SettingPage(
           appController: appController,
-          //   loginController: loginController,
+          loginController: loginController,
         ),
       );
     }
-    if (loginController.isLogin.isFalse) {
-      loginController.setLocalId();
-    }
+
     return WillPopScope(
         onWillPop: _requestPop,
         child: GetBuilder<LoginController>(
@@ -101,12 +99,10 @@ class _HomePage extends State<HomePage> {
           builder: (value) {
             return Scaffold(
               backgroundColor: getBackgroundColor(context),
-              appBar: getNoneAppBar(
-                context,
-                color: value.isLogin.value || _currentIndex != 1
-                    ? subColor
-                    : getBackgroundColor(context),
-              ),
+              appBar: getNoneAppBar(context,
+                  color: value.isLogin.value || _currentIndex != 1
+                      ? subColor
+                      : getBackgroundColor(context)),
               bottomNavigationBar: _buildBottomBar(),
               body: SafeArea(
                 child: Container(
@@ -118,7 +114,7 @@ class _HomePage extends State<HomePage> {
         ));
   }
 
-  int _currentIndex = 1;
+  int _currentIndex = 1 ;
 
   Widget _buildBottomBar() {
     const inactiveColor = Colors.transparent;
@@ -144,7 +140,7 @@ class _HomePage extends State<HomePage> {
               _currentIndex = index;
             });
 
-            //     loginController.getUser();
+            loginController.getUser();
           },
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(

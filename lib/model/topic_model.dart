@@ -9,6 +9,7 @@ class TopicModel {
 
   factory TopicModel.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data() as Map;
+    // print(data);
     return TopicModel(
       id: doc.id,
       title: data['title'],

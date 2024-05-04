@@ -18,6 +18,7 @@ class DataController extends GetxController {
 
   void fetchData(int refId) async {
     isLoading(true);
+
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection(FirebaseData.quizList)
         .where('ref_id', isEqualTo: refId)

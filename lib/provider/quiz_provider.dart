@@ -37,6 +37,7 @@ class QuizProvider extends TimeProvider with WidgetsBindingObserver {
 
   @override
   void timeOver() {
+    print('=========================is First ${this.isFirstPurchased}');
     nextQuiz(isDone: true, this.isFirstPurchased);
   }
 
